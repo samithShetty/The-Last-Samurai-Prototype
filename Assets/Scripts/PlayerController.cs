@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Transform playerTransform;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float turnSpeed;
     [SerializeField] private int maxHealth;
+    [SerializeField] private CameraController camController;
 
     private Rigidbody rb;
     private Animator anim;
@@ -36,29 +39,23 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        rb.velocity = (Quaternion.Euler(0, 45, 0) * new Vector3(move.x, 0f, move.y / Mathf.Sin(Mathf.PI/6))) * moveSpeed;
+        rb.velocity = Quaternion.Euler(0,camController.GetAngle(),0) * new Vector3(move.x,0,move.y).normalized * moveSpeed; // Rotate move input by camera
+        anim.SetBool("isMoving", IsMoving());
     }
 
     private void Look()
     {
-        if (!IsMoving()) { // If standing still, orient player to face mouse
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Camera.main.farClipPlane, 1 << 6)) {
-                transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-            } 
-
-            anim.SetBool("isMoving", false);
-        }
-        else { // Otherwise, face move direction
-            transform.LookAt(transform.position + rb.velocity);
-            anim.SetBool("isMoving", true);
-
-        }
+        playerTransform.LookAt(playerTransform.position + rb.velocity);
     }
 
     public void OnMove(InputValue value)
     {
         move = value.Get<Vector2>();
+    }
+
+    public void OnLook(InputValue value)
+    {
+        camController.OnLook(value);
     }
 
     public void OnAttack()

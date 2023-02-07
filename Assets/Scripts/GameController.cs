@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController instance;
     public float spawnInterval;
     public float spawnIntervalDecayRate;
     public int killsToWin;
 
     public GameObject Player;
     public GameObject EnemyPrefab;
+
+    private void Awake() 
+    {
+        // Check to see if the singleton exists already
+        if (instance == null) {
+            // Create singleton
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Prevent Game Object from being Destroyed
+        }
+        else
+        {
+            // Singleton already exists, destroy this copy
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
