@@ -26,8 +26,8 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        RotateCamera();
         FollowTarget();
+        RotateCamera();
     }
 
     private void FollowTarget()
@@ -37,17 +37,22 @@ public class CameraController : MonoBehaviour
 
     private void RotateCamera()
     {
-        horizontalPivotAngle += look.x * cameraLookSpeed;
+        Vector3 playerForward = targetTransform.forward;
+        Quaternion targetRotation = Quaternion.LookRotation(targetTransform.forward);
+        cameraPivotTransform.rotation = Quaternion.Lerp(cameraPivotTransform.rotation, targetRotation, cameraLookSpeed*Time.deltaTime);
+
+
+        // horizontalPivotAngle += look.x * cameraLookSpeed;
         verticalPivotAngle -= look.y * cameraLookSpeed;
         verticalPivotAngle = Mathf.Clamp(verticalPivotAngle, minPivotAngle, maxPivotAngle);
 
         cameraHolderTransform.rotation = Quaternion.Euler(new Vector3(0,horizontalPivotAngle,0)); // y rotation = left/right
-        cameraPivotTransform.localRotation = Quaternion.Euler(new Vector3(verticalPivotAngle,0,0)); // X rotation = up/down
+        // cameraPivotTransform.localRotation = Quaternion.Euler(new Vector3(verticalPivotAngle,0,0)); // X rotation = up/down
     }
 
-    public void OnLook(InputValue value)
+    public void Look(Vector2 lookInput)
     {
-        look = value.Get<Vector2>();
+        look = lookInput;
     }
 
     public float GetAngle()

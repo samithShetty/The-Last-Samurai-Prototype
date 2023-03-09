@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
         Vector2 random = Random.insideUnitCircle * 50;
         Vector3 location = new Vector3(Player.transform.position.x + random.x, Player.transform.position.y, Player.transform.position.z + random.y);
         Instantiate(EnemyPrefab, location, Quaternion.identity);
-        spawnInterval = Mathf.Max(1f, spawnInterval*spawnIntervalDecayRate);
+        spawnInterval = Mathf.Max(2f, spawnInterval*spawnIntervalDecayRate);
         yield return new WaitForSeconds(spawnInterval);
         StartCoroutine(SpawnEnemy());
     }

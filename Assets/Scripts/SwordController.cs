@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SwordController : MonoBehaviour
 {
-    private Animator anim;
     public bool isPlayer;
-    public bool canAttack = true;
-    public float recoveryTime = 2f; //Cooldown on swing after being parried
+    [SerializeField] private int damage;
+    [SerializeField] private float recoveryTime; //Cooldown on swing after being parried
+    private bool canAttack = true;
+    private Animator anim;
 
     void Start()
     {
@@ -39,15 +40,15 @@ public class SwordController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Sword" && other.GetComponent<SwordController>().IsParrying()) 
         {   
-            Debug.Log("Parry!");
+            //Debug.Log("Parry!");
             anim.Play("Base.idle");
             StartCoroutine(ParryRecovery());
         } else if (other.tag == "Enemy" && IsAttacking()) 
         {
-            Debug.Log("Enemy Hit");
+            //Debug.Log("Enemy Hit");
             Destroy(other.gameObject);
         } else if (other.tag == "Player") {
-            Debug.Log("PLAYER HIT" + Time.time.ToString());
+            other.GetComponent<PlayerController>().UpdateHealth(-damage);
         }    
     }
 
