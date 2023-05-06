@@ -346,8 +346,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7945f95663a763d409572094af6948f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1775517599}
-  lerpSpeed: 1
+  targetTransform: {fileID: 0}
+  cameraHolderTransform: {fileID: 0}
+  cameraPivotTransform: {fileID: 0}
+  cameraFollowTime: 0
+  cameraLookSpeed: 0
+  minPivotAngle: 0
+  maxPivotAngle: 0
 --- !u!1 &1725579652
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +502,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  maxSpeed: 0
+  turnSpeed: 0
+  jumpForce: 0
+  dirAirJumpForce: 0
+  grappleRange: 0
+  grappleStrength: 0
+  maxHealth: 0
+  camController: {fileID: 0}
+  rb: {fileID: 0}
+  sc: {fileID: 0}
+  nearestRail: {fileID: 0}
+  moveInput: {x: 0, y: 0}
 --- !u!114 &1775517595
 MonoBehaviour:
   m_ObjectHideFlags: 0

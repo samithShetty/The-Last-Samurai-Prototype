@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 1533943397321880767}
   - component: {fileID: 7128519817501849835}
   - component: {fileID: 7407756983534269086}
+  - component: {fileID: 5601905218811844395}
+  - component: {fileID: 7885321941410266563}
   m_Layer: 0
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921983409650161037}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.00090651587, y: 1.3652374, z: 0.00008839074}
+  m_LocalRotation: {x: -0.7071069, y: 0.0000001490116, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0.0010675942, y: 1.36479, z: -0.00019907953}
   m_LocalScale: {x: 2.184034, y: 5.538904, z: 70.259705}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fe10a0397004ca458d823d336ba9eae, type: 2}
+  - {fileID: 2100000, guid: 25a393d88d3a08042bea6f45b6154bae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +85,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5601905218811844395
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921983409650161037}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7401353886334607404, guid: 3d6aafbb73493fe4aabaeb45f0ce1e1f, type: 3}
+--- !u!114 &7885321941410266563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921983409650161037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81e4407995790d46a54bc19b777d962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  recoveryTime: 2
 --- !u!1 &1891483979280652462
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,9 +122,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257689590004564500}
-  - component: {fileID: 1891483979280652463}
-  - component: {fileID: 1891483979280652456}
-  - component: {fileID: 1891483979280652457}
   m_Layer: 0
   m_Name: katana
   m_TagString: Sword
@@ -109,8 +136,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891483979280652462}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.19289428, y: -0.8596035, z: 0.4725671, w: 0.023534704}
+  m_LocalPosition: {x: -0.00249, y: -0.00269, z: 0.00569}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120,54 +147,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1891483979280652463
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891483979280652462}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e181047278a85ce4491fce8ec5789df8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
---- !u!65 &1891483979280652456
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891483979280652462}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2.5888722, z: 1}
-  m_Center: {x: 0.0011721551, y: 1.3103937, z: -0}
---- !u!114 &1891483979280652457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891483979280652462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 333defc295b3d4142ae305dfd6133b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  damage: 10
-  recoveryTime: 2
 --- !u!1 &2614239394136828927
 GameObject:
   m_ObjectHideFlags: 0
