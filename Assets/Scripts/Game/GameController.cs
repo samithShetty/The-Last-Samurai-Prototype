@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -11,20 +12,11 @@ public class GameController : MonoBehaviour
 
     public GameObject Player;
     public GameObject EnemyPrefab;
+    public int currentLevel;
 
-    private void Awake() 
+    public void WinGame() 
     {
-        // Check to see if the singleton exists already
-        if (instance == null) {
-            // Create singleton
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Prevent Game Object from being Destroyed
-        }
-        else
-        {
-            // Singleton already exists, destroy this copy
-            Destroy(gameObject);
-        }
+        SceneManager.LoadScene("Victory");
     }
 
     // Start is called before the first frame update
@@ -33,18 +25,16 @@ public class GameController : MonoBehaviour
         StartCoroutine(SpawnEnemy());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     IEnumerator SpawnEnemy() {
-        Vector2 random = Random.insideUnitCircle * 50;
-        Vector3 location = new Vector3(Player.transform.position.x + random.x, Player.transform.position.y, Player.transform.position.z + random.y);
-        Instantiate(EnemyPrefab, location, Quaternion.identity);
-        spawnInterval = Mathf.Max(2f, spawnInterval*spawnIntervalDecayRate);
-        yield return new WaitForSeconds(spawnInterval);
-        StartCoroutine(SpawnEnemy());
+        if (Player != null) 
+        { 
+            Vector2 random = Random.insideUnitCircle * 50;
+            Vector3 location = new Vector3(Player.transform.position.x + random.x, Player.transform.position.y, Player.transform.position.z + random.y);
+            Instantiate(EnemyPrefab, location, Quaternion.identity);
+            spawnInterval = Mathf.Max(1.5f, spawnInterval*spawnIntervalDecayRate);
+            yield return new WaitForSeconds(spawnInterval);
+            StartCoroutine(SpawnEnemy());
+        }
     }
 }

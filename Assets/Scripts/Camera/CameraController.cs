@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 //let camera follow target
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform targetTransform; // Player (or whatever object camera is following)
+    [SerializeField] public Transform targetTransform; // Player (or whatever object camera is following)
     [SerializeField] private Transform cameraHolderTransform; // For the Camera Grand-Parent Object
     [SerializeField] private Transform cameraPivotTransform; // For the Camera Parent Object
     [SerializeField] private float cameraFollowTime; // Lower -> Faster Camera Following
@@ -58,6 +58,10 @@ public class CameraController : MonoBehaviour
     public float GetAngle()
     {
         return horizontalPivotAngle;
+    }
+
+    private void OnDestroy() {
+        Cursor.lockState = CursorLockMode.None;    
     }
 }
 

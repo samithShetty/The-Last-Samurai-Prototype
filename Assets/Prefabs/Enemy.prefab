@@ -284,13 +284,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 18
+  detectionRadius: 25
   circlingRadius: 8
   circlingStepSize: 5
   attackRadius: 4
   attackCooldown: 1.5
   enemyCorpsePrefab: {fileID: 932781050889837714, guid: 242dc442dedd4c940958e7b7b7ee881d, type: 3}
   swordController: {fileID: 7434282591437609467}
-  trans: {fileID: 0}
   anim: {fileID: 13667744918401354}
 --- !u!65 &7615724345833030041
 BoxCollider:

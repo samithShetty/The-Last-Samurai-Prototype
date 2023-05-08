@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float detectionRadius;
     [SerializeField] private float circlingRadius;
     [SerializeField] private float circlingStepSize;
     [SerializeField] private float attackRadius;
@@ -22,6 +23,8 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 velocity;
     private bool CanAttack = true;
+    private bool aggro;
+    private bool circling;
 
     
     void Start()
@@ -41,7 +44,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetPlayerDistance() < attackRadius) {
+        float playerDistance = GetPlayerDistance();
+        if (playerDistance < attackRadius) {
             anim.SetBool("isMoving", false);
             if (CanAttack)
             {
@@ -51,16 +55,23 @@ public class EnemyController : MonoBehaviour
                 CanAttack = false;
                 StartCoroutine(ResetAttackCooldown());
             }
-        } else if (GetPlayerDistance() < circlingRadius) 
+        } else if (playerDistance < circlingRadius && !aggro) 
         {
             trans.LookAt(player.transform.position);
             trans.Rotate(new Vector3(0,80,0));
             agent.destination = trans.position + trans.forward*circlingStepSize;
+            
+            if (!circling) {
+                StartCoroutine(GoAggro());
+                circling = true;
+            }
             anim.SetBool("isMoving", true);
-        } else
-        {
+        } else if (playerDistance < detectionRadius) {
+            circling = false;
             anim.SetBool("isMoving", true);
             ChasePlayer();
+        } else {
+            StartCoroutine(Roam());
         }
         
     }
@@ -70,7 +81,7 @@ public class EnemyController : MonoBehaviour
         agent.destination = player.transform.position;
         if (pc.IsMoving())
         {
-            agent.destination += player.transform.forward * GetPlayerDistance();
+            agent.destination += player.transform.forward * GetPlayerDistance() * 0.8f;
         }
     }
 
@@ -83,6 +94,20 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown);
         CanAttack = true;
+    }
+
+    IEnumerator GoAggro() 
+    {
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        aggro = true;
+    }
+
+    IEnumerator Roam() 
+    {
+        Vector2 random = Random.insideUnitCircle * 10;
+        agent.destination = new Vector3(random.x, trans.position.y,random.y);
+        yield return new WaitForSeconds(Random.Range(3f, 6f));
+
     }
 
     public void Die() 

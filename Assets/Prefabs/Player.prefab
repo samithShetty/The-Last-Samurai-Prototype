@@ -5077,15 +5077,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556818805686355496}
+  - component: {fileID: 13667744918401356}
+  - component: {fileID: 5075283483598394050}
   - component: {fileID: 13667744918401357}
   - component: {fileID: 13667744918401354}
-  - component: {fileID: 13667744918401356}
   - component: {fileID: 13667744918401359}
   - component: {fileID: 5035612241380423673}
   - component: {fileID: 1492294729850703283}
   - component: {fileID: 620246811830959711}
   - component: {fileID: 626110943834571545}
-  - component: {fileID: 5075283483598394050}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5102,7 +5102,7 @@ Transform:
   m_GameObject: {fileID: 932781050889837714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: -0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8866147933588461238}
@@ -5110,6 +5110,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13667744918401356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932781050889837714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b55e9b673b1e044b5df51f3cc3dca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  maxSpeed: 20
+  turnSpeed: 5
+  jumpForce: 15
+  dirAirJumpForce: 50
+  grappleRange: 50
+  grappleStrength: 5
+  maxHealth: 100
+  maxSpeedBonus: 1.5
+  camController: {fileID: 0}
+  gui: {fileID: 0}
+  playerTransform: {fileID: 556818805686355496}
+  rb: {fileID: 13667744918401357}
+  combatManager: {fileID: 5075283483598394050}
+  nearestRail: {fileID: 0}
+  playerCorpsePrefab: {fileID: 932781050889837714, guid: 0658bcb11f4eda341b800f851dff7069, type: 3}
+  moveInput: {x: 0, y: 0}
+  speedBonus: 0
+--- !u!114 &5075283483598394050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932781050889837714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333defc295b3d4142ae305dfd6133b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 13667744918401356}
+  footTransform: {fileID: 5980771357399743297}
+  kickSize: 1
+  parrySize: 1
+  damage: 0
+  recoveryTime: 0
+  parryInvulnerabilityTime: 0
+  particleSystem: {fileID: 0}
+  isKicking: 0
+  blockState: 0
+  isInvuln: 0
 --- !u!54 &13667744918401357
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5146,32 +5199,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &13667744918401356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932781050889837714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43b55e9b673b1e044b5df51f3cc3dca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  maxSpeed: 20
-  turnSpeed: 5
-  jumpForce: 15
-  dirAirJumpForce: 50
-  grappleRange: 0
-  grappleStrength: 0
-  maxHealth: 100
-  camController: {fileID: 0}
-  playerTransform: {fileID: 556818805686355496}
-  rb: {fileID: 13667744918401357}
-  combatManager: {fileID: 0}
-  nearestRail: {fileID: 0}
-  moveInput: {x: 0, y: 0}
 --- !u!114 &13667744918401359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5260,29 +5287,6 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   endOfPathInstruction: 2
   speed: -1
---- !u!114 &5075283483598394050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932781050889837714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 333defc295b3d4142ae305dfd6133b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pc: {fileID: 13667744918401356}
-  footTransform: {fileID: 5980771357399743297}
-  kickSize: 1
-  parrySize: 1
-  damage: 0
-  recoveryTime: 0
-  parryInvulnerabilityTime: 0
-  particleSystem: {fileID: 0}
-  isKicking: 0
-  blockState: 0
-  isInvuln: 0
 --- !u!1 &972867479317193459
 GameObject:
   m_ObjectHideFlags: 0

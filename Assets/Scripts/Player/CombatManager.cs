@@ -84,6 +84,8 @@ public class CombatManager : MonoBehaviour
     private void kickEnemy(GameObject enemy) 
     {
         enemy.GetComponent<EnemyController>().Die();
+        pc.UpdateSpeedBonus(0.1f);
+
     }
 
     public bool IsAttacking()
@@ -106,12 +108,15 @@ public class CombatManager : MonoBehaviour
         anim.SetTrigger("idle");
         StartCoroutine(PlayerInvulnerability(parryInvulnerabilityTime));
         particleSystem.Play();
+        pc.UpdateSpeedBonus(0.2f);
 
     }
 
     public void BlockSuccess() 
     {
         anim.SetTrigger("idle");
+        pc.UpdateSpeedBonus(0.05f);
+
     }
 
     IEnumerator PlayerInvulnerability(float invulnTime) 
